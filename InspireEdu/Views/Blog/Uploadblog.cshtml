@@ -1,0 +1,70 @@
+﻿@model InspireEdu.Models.Blogtbl
+
+@{
+    ViewBag.Title = "Upload Blog";
+}
+
+<h2 style="margin-left:200px">Upload Blog</h2>
+
+
+@using (Html.BeginForm("Uploadblog","Blog",FormMethod.Post,new { enctype= "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4 style="margin-left:200px">New Blog</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogCat, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BlogCat, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BlogCat, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BlogTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BlogTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogDesc, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BlogDesc, new { htmlAttributes = new { @class = "form-control " } })
+            @Html.ValidationMessageFor(model => model.BlogDesc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogImage, htmlAttributes: new { @class = "control-label col-md-2"})
+        <div class="col-md-10">
+            <input type="file" name="ImageFile" required>
+        </div>
+       </div>
+       
+     
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Upload" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+   <h3>@ViewBag.SuccessMsg</h3>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "BlogList","Blog")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

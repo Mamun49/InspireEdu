@@ -1,0 +1,85 @@
+﻿@model IEnumerable<InspireEdu.Models.Blogtbl>
+
+@{
+    ViewBag.Title = "BlogList";
+}
+
+<h2 style="margin-left:200px">List of All Blog</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Uploadblog","Blog")
+</p>
+<p>
+
+
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Blog.." title="Blog Title">
+
+</p>
+<table class="table" id="myTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BlogId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlogTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlogCat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlogDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=> model.BlogImage)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <th>
+        @Html.DisplayFor(modelItem => item.BlogId)
+    </th>
+    <td>
+        @Html.DisplayFor(modelItem => item.BlogTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BlogCat)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BlogDesc)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BlogImage)
+    </td>
+    <td>
+        @*@Html.ActionLink("Edit", "BlogEdit", "Blog", new { id = item.BlogId })*@
+
+        <a href="@Url.Action("BlogEdit","Blog",new { id=item.BlogId})">Edit</a> |
+        <a href="@Url.Action("BlogDelete","Blog",new { id=item.BlogId})">Delete</a>
+        @*@Html.ActionLink("Delete", "BlogDelete", "Blog", new { id = item.BlogId })*@
+    </td>
+</tr>
+    }
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+</table>

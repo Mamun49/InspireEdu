@@ -1,0 +1,48 @@
+﻿@model InspireEdu.Models.Blogtbl
+
+@{
+    ViewBag.Title = "BlogDelete";
+}
+
+<h2 style="margin-left:200px">Delete Blog</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Blog Table</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogCat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogCat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogDesc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "BlogList","Blog")
+        </div>
+    }
+</div>
